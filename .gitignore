@@ -10,7 +10,7 @@ Thumbs.db
 #ENV
 /*.html
 /*.php
-/node_modules
+/**/node_modules
 .sass-cache
 /css/*.css*
 /js/dist.min.js

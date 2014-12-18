@@ -1,100 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="board" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 960 560" enable-background="new 0 0 960 560" xml:space="preserve">
-<circle id="rim" stroke="#000000" stroke-miterlimit="10" cx="480" cy="280" r="231.5"/>
-<radialGradient id="frame_1_" cx="480" cy="280" r="230" gradientUnits="userSpaceOnUse">
-	<stop  offset="0" style="stop-color:#4D4D4D"/>
-	<stop  offset="1" style="stop-color:#1A1A1A"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 471 471" enable-background="new 0 0 471 471">
+<defs>
+	<filter id="drop-shadow">
+		<feGaussianBlur in="SourceAlpha" result="blur" stdDeviation="5" />
+		<feComponentTransfer>
+			<feFuncA type="linear" slope="0.5"/>
+		</feComponentTransfer>
+		<feMerge>
+			<feMergeNode/>
+			<feMergeNode in="SourceGraphic" mode="normal"/>
+		</feMerge>
+	</filter>
+</defs>
+<radialGradient id="trim-gradient" cx="235.5" cy="235.5" r="235" gradientUnits="userSpaceOnUse">
+	<stop offset="0" style="stop-color:#4D4D4D"/>
+	<stop offset="1" style="stop-color:#1A1A1A"/>
 </radialGradient>
-<circle id="frame" fill="url(#frame_1_)" stroke="#333333" stroke-miterlimit="10" cx="480" cy="280" r="230"/>
-<circle id="lense" opacity="0.7" fill="#1A1A1A" cx="480" cy="280" r="45"/>
-<g id="pad4">
-	<g>
-		<path fill="#39B54A" d="M427.9,286H277.2c-8.7,0-15.6,7.4-15,16.1c7.9,104.2,91.5,187.8,195.6,195.6c8.7,0.7,16.1-6.2,16.1-15
-			V332.1C449.8,329.4,430.6,310.2,427.9,286z"/>
-	</g>
-	<defs>
-		<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="262.2" y="286" width="211.8" height="211.8">
-			
-				<feColorMatrix  type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0" color-interpolation-filters="sRGB" result="source"/>
-		</filter>
-	</defs>
-	<mask maskUnits="userSpaceOnUse" x="262.2" y="286" width="211.8" height="211.8" id="SVGID_1_">
-		<g filter="url(#Adobe_OpacityMaskFilter)">
-			<image overflow="visible" width="216" height="216" xlink:href="F7656396D6FA09D4.jpg"  transform="matrix(1 0 0 1 260 284)">
-			</image>
-		</g>
-	</mask>
-	<g opacity="0.25" mask="url(#SVGID_1_)">
-		<path d="M427.9,286H277.2c-8.7,0-15.6,7.4-15,16.1c7.9,104.2,91.5,187.8,195.6,195.6c8.7,0.7,16.1-6.2,16.1-15V332.1
-			C449.8,329.4,430.6,310.2,427.9,286z"/>
-	</g>
-</g>
-<g id="pad3">
-	<g>
-		<path fill="#0055FF" d="M682.8,286H532.1c-2.8,24.2-22,43.4-46.1,46.1v150.7c0,8.7,7.4,15.6,16.1,15
-			c104.2-7.9,187.8-91.5,195.6-195.6C698.5,293.4,691.6,286,682.8,286z"/>
-	</g>
-	<defs>
-		<filter id="Adobe_OpacityMaskFilter_1_" filterUnits="userSpaceOnUse" x="486" y="286" width="211.8" height="211.8">
-			
-				<feColorMatrix  type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0" color-interpolation-filters="sRGB" result="source"/>
-		</filter>
-	</defs>
-	<mask maskUnits="userSpaceOnUse" x="486" y="286" width="211.8" height="211.8" id="SVGID_2_">
-		<g filter="url(#Adobe_OpacityMaskFilter_1_)">
-			<image overflow="visible" width="216" height="216" xlink:href="F7656396D6FA09D5.jpg"  transform="matrix(1 0 0 1 484 284)">
-			</image>
-		</g>
-	</mask>
-	<g opacity="0.25" mask="url(#SVGID_2_)">
-		<path d="M682.8,286H532.1c-2.8,24.2-22,43.4-46.1,46.1v150.7c0,8.7,7.4,15.6,16.1,15c104.2-7.9,187.8-91.5,195.6-195.6
-			C698.5,293.4,691.6,286,682.8,286z"/>
-	</g>
-</g>
-<g id="pad2">
-	<g>
-		<path fill="#FFFF00" d="M697.8,257.9c-7.9-104.2-91.5-187.8-195.6-195.6c-8.7-0.7-16.1,6.2-16.1,15v150.7
-			c24.2,2.8,43.4,22,46.1,46.1h150.7C691.6,274,698.5,266.6,697.8,257.9z"/>
-	</g>
-	<defs>
-		<filter id="Adobe_OpacityMaskFilter_2_" filterUnits="userSpaceOnUse" x="486" y="62.2" width="211.8" height="211.8">
-			
-				<feColorMatrix  type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0" color-interpolation-filters="sRGB" result="source"/>
-		</filter>
-	</defs>
-	<mask maskUnits="userSpaceOnUse" x="486" y="62.2" width="211.8" height="211.8" id="SVGID_3_">
-		<g filter="url(#Adobe_OpacityMaskFilter_2_)">
-			<image overflow="visible" width="216" height="216" xlink:href="F7656396D6FA09D3.jpg"  transform="matrix(1 0 0 1 484 60)">
-			</image>
-		</g>
-	</mask>
-	<g opacity="0.25" mask="url(#SVGID_3_)">
-		<path d="M697.8,257.9c-7.9-104.2-91.5-187.8-195.6-195.6c-8.7-0.7-16.1,6.2-16.1,15v150.7c24.2,2.8,43.4,22,46.1,46.1h150.7
-			C691.6,274,698.5,266.6,697.8,257.9z"/>
-	</g>
-</g>
-<g id="pad1">
-	<g>
-		<path fill="#ED1C24" d="M474,227.9V77.2c0-8.7-7.4-15.6-16.1-15c-104.2,7.9-187.8,91.5-195.6,195.6c-0.7,8.7,6.2,16.1,15,16.1
-			h150.7C430.6,249.8,449.8,230.6,474,227.9z"/>
-	</g>
-	<defs>
-		<filter id="Adobe_OpacityMaskFilter_3_" filterUnits="userSpaceOnUse" x="262.2" y="62.2" width="211.8" height="211.8">
-			
-				<feColorMatrix  type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0" color-interpolation-filters="sRGB" result="source"/>
-		</filter>
-	</defs>
-	<mask maskUnits="userSpaceOnUse" x="262.2" y="62.2" width="211.8" height="211.8" id="SVGID_4_">
-		<g filter="url(#Adobe_OpacityMaskFilter_3_)">
-			<image overflow="visible" width="216" height="216" xlink:href="F7656396D6FA09DC.jpg"  transform="matrix(1 0 0 1 260 60)">
-			</image>
-		</g>
-	</mask>
-	<g opacity="0.25" mask="url(#SVGID_4_)">
-		<path d="M474,227.9V77.2c0-8.7-7.4-15.6-16.1-15c-104.2,7.9-187.8,91.5-195.6,195.6c-0.7,8.7,6.2,16.1,15,16.1h150.7
-			C430.6,249.8,449.8,230.6,474,227.9z"/>
-	</g>
-</g>
+<path fill="url(#trim-gradient)" filter="url(#drop-shadow)" stroke="#333333" stroke-miterlimit="10" d="M235.5,0.5c-129.8,0-235,105.2-235,235s105.2,235,235,235 s235-105.2,235-235S365.3,0.5,235.5,0.5z M23,208.8c7.5-99,86.8-178.3,185.8-185.8c8.3-0.6,15.2,6,15.2,14.3v109.5 c-40,5.1-72.2,37.3-77.3,77.3H37.2C28.9,224,22.4,217,23,208.8z M224,433.8c0,8.3-7,14.8-15.2,14.2c-99-7.5-178.3-86.8-185.8-185.8 c-0.6-8.3,6-15.2,14.3-15.2h109.5c5.1,40,37.3,72.2,77.3,77.3V433.8z M247,37.2c0-8.3,7-14.8,15.2-14.2 c99,7.5,178.3,86.8,185.8,185.8c0.6,8.3-6,15.2-14.3,15.2H324.3c-5.1-40-37.3-72.2-77.3-77.3V37.2z M448,262.2	c-7.5,99-86.8,178.3-185.8,185.8c-8.3,0.6-15.2-6-15.2-14.3V324.3c40-5.1,72.2-37.3,77.3-77.3h109.5C442.1,247,448.6,254,448,262.2z"/>
+<circle id="lense" opacity="0.9" fill="#1A1A1A" cx="235.5" cy="235.5" r="68.2"/>
+<linearGradient id="lense-gradient" gradientUnits="userSpaceOnUse" x1="235.5" y1="303.7096" x2="235.5" y2="224.493">
+	<stop offset="0" style="stop-color:#B3B3B3"/>
+	<stop offset="1" style="stop-color:#1A1A1A"/>
+</linearGradient>
+<path opacity="0.7" fill="url(#lense-gradient)" d="M168.2,224.5c-0.6,3.6-0.9,7.3-0.9,11c0,37.7,30.5,68.2,68.2,68.2s68.2-30.5,68.2-68.2 c0-3.7-0.3-7.4-0.9-11H168.2z"/>
 </svg>

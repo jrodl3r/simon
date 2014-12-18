@@ -6,35 +6,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     sass: {
-      dev: {
-        options: {
-          style: 'expanded',
-          require: ['susy', 'breakpoint'],
-          compass: true
-        },
-        files: {
-          'css/base.css': 'css/base.scss'
-        }
-      },
       dist: {
-        options: {
-          style: 'compressed',
-          require: ['susy', 'breakpoint'],
-          compass: true,
-          sourcemap: 'none'
-        },
         files: {
-          'css/dist.css': 'css/base.scss'
-        }
-      },
-      resume: {
-        options: {
-          style: 'expanded',
-          require: ['susy', 'breakpoint'],
-          compass: true
-        },
-        files: {
-          'css/resume.css': 'css/resume.scss'
+          'css/core.css': 'css/core.scss'
         }
       }
     },
@@ -65,56 +39,18 @@ module.exports = function(grunt) {
           "Breakpoints": true
         }
       },
-      files: ['Gruntfile.js', 'js/*.js', '!js/dist*.js']
-    },
-
-
-    uglify: {
-      dist: {
-        src: ['js/*.js', '!js/dist*.js'],
-        dest: 'js/dist.min.js'
-      }
-    },
-
-
-    // concat: {
-    //   options: {
-    //     separator: '',
-    //     stripBanners: true
-    //   },
-    //   dist: {
-    //     src: ['js/vendor/modernizr-2.8.0.min.js', 'js/vendor/jquery-1.11.1.min.js', 'js/dist.min.js'],
-    //     dest: 'js/dist.js'
-    //   }
-    // },
-
-
-    targethtml: {
-      dev: {
-        files: {
-          'index.php': 'tmpl/index.html'
-        }
-      },
-      dist: {
-        files: {
-          'index.php': 'tmpl/index.html'
-        }
-      }
+      files: ['Gruntfile.js', 'js/*.js']
     },
 
 
     watch: {
       sass: {
-        files: ['css/**/*.scss', '!css/resume.scss'],
-        tasks: ['sass:dev']
+        files: ['css/**/*.scss'],
+        tasks: ['sass:dist']
       },
       js: {
         files: '<%= jshint.files %>',
         tasks: ['jshint']
-      },
-      html: {
-        files: 'tmpl/index.html',
-        tasks: ['targethtml:dev']
       },
       options: {
         livereload: true
@@ -129,17 +65,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  //grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-targethtml');
 
 
   // Register Tasks
   // ----------------------------------------------------------
-  grunt.registerTask('default', ['sass:dev', 'jshint', 'targethtml:dev']);
-  grunt.registerTask('dev', ['sass:dev', 'jshint', 'targethtml:dev', 'watch']);
-  grunt.registerTask('dist', ['sass:dist', 'jshint', 'uglify', 'targethtml:dist']);
-  grunt.registerTask('resume', ['sass:resume']);
+  grunt.registerTask('default', ['sass:dist', 'jshint', 'watch']);
 
 
   // Show Timer
