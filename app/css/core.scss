@@ -1,3 +1,8 @@
+$green      : #39B54A;
+$red        : #ED1C24;
+$blue       : #0055FF;
+$yellow     : #FCEE21;
+
 body {
   margin: 0;
   padding: 0;
@@ -9,24 +14,18 @@ body {
   height: 100%;
   min-width: 800px;
   min-height: 700px;
-
-  //background: fuchsia;
 }
 
 #board {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  position: relative;
   display: block;
   width: 600px;
   height: 600px;
-  margin: auto;
+  margin: 6% auto;
   border-radius: 50%;
-  overflow: auto;
+  overflow: hidden;
 
-  #trim {
+  #pads {
     position: absolute;
     z-index: 2;
     top: 0;
@@ -35,32 +34,46 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url(../img/board.svg) center no-repeat;
-    background-size: cover;
+    border-radius: 50%;
+    overflow: hidden;
+    -webkit-mask: url(../img/pad-mask.svg);
+
+    .pad {
+      float: left;
+      width: 50%;
+      height: 50%;      
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.95;
+      }
+
+      &#pad1 {
+        background: $green radial-gradient(circle at bottom right, $green, darken($green, 13%) 40%, darken($green, 13%) 55%, $green 100%);
+      }
+
+      &#pad2 {
+        background: $red radial-gradient(circle at bottom left, lighten($red, 7%), darken($red, 17%) 40%, darken($red, 17%) 55%, lighten($red, 7%) 100%);
+      }
+      &#pad3 {
+        background: $yellow radial-gradient(circle at top right, lighten($yellow, 15%), darken($yellow, 16%) 40%, darken($yellow, 16%) 55%, lighten($yellow, 15%) 100%);
+
+        &:hover {
+          opacity: 0.88;
+        }
+      }
+      &#pad4 {
+        background: $blue radial-gradient(circle at top left, lighten($blue, 10%), darken($blue, 13%) 40%, darken($blue, 13%) 55%, lighten($blue, 10%) 100%);
+      }
+    }
   }
 
-  .pad {
-    float: left;
-    width: 50%;
-    height: 50%;
-
-    &:hover {
-      cursor: pointer;
-      opacity: 0.5;
-    }
-
-    &#pad1 {
-      background: #39B54A;
-    }
-
-    &#pad2 {
-      background: #ED1C24;
-    }
-    &#pad3 {
-      background: #0055FF;
-    }
-    &#pad4 {
-      background: #FCEE21;
-    }
+  #trim {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(../img/board.svg) center no-repeat;
+    background-size: cover;
   }
 }
