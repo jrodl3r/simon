@@ -6,23 +6,20 @@
 
 document.addEventListener('DOMContentLoaded', function(e) {
 
-  var pads = document.querySelectorAll('.pad');
+  // config
+  var pads           = document.querySelectorAll('.pad');
+  var pulse_duration = 300;
 
-  // Setup Pads
+  // setup pads (click/tap effect)
   Array.prototype.forEach.call(pads, function(el, i) {
 
     el.addEventListener('click', function() {
 
-      // make pad active
       this.className = 'pad active';
 
-      // deactivate all pads
-      setTimeout(function() {
-        Array.prototype.forEach.call(pads, function(el) {
-           el.className = 'pad';
-        });
-      }, 300);
+      setTimeout(function(self) {
+        self.className = 'pad';
+      }, pulse_duration, this);
     });
   });
-
 });

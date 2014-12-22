@@ -3,4 +3,4 @@ Web-based version of the classic electronic memory game from the 70's & 80's. (R
 
 * Pure JavaScript (No jQuery)
 * ES6 Classes
-* Grunt, Compass + Jasmine
+* Grunt + Compass + Jasmine

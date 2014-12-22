@@ -6,10 +6,12 @@
 @import 'compass/css3';
 
 
-$green      : #39B54A;
-$red        : #ED1C24;
-$blue       : #0055FF;
-$yellow     : #FCEE21;
+$green              : #39B54A;
+$red                : #ED1C24;
+$blue               : #0055FF;
+$yellow             : #FCEE21;
+
+$pulse-duration     : .3s;
 
 
 body {
@@ -56,7 +58,7 @@ body {
 
       &.active {
         cursor: -webkit-grab;
-        @include animation(pulsate .25s 1);
+        @include animation(pulse $pulse-duration ease-in 1);
       }
 
       &#pad1 {
@@ -69,6 +71,10 @@ body {
 
       &#pad3 {
         background: $yellow radial-gradient(circle at top right, lighten($yellow, 15%), darken($yellow, 18%) 40%, darken($yellow, 18%) 55%, lighten($yellow, 15%) 100%);
+
+        &.active {
+          @include animation(pulse-alt $pulse-duration ease-in 1);
+        }
       }
 
       &#pad4 {
@@ -86,8 +92,14 @@ body {
   }
 }
 
-@include keyframes(pulsate) {
+@include keyframes(pulse) {
   0% { opacity: 1 }
   50% { opacity: 0.65 }
+  100% { opacity: 1 }
+}
+
+@include keyframes(pulse-alt) {
+  0% { opacity: 1 }
+  50% { opacity: 0.54 }
   100% { opacity: 1 }
 }
