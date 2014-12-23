@@ -33,27 +33,38 @@ module.exports = function(grunt) {
         eqnull: false,
         browser: true,
         esnext: true,
+        globalstrict: true,
         globals: {
-          "$": false,
-          "jQuery": false,
-          "Modernizr": false,
           "console": false,
           "window": true,
           "debug": true,
           "log": true,
-          "Breakpoints": true
         }
       },
-      files: ['Gruntfile.js', 'js/*.js']
+      files: ['Gruntfile.js', 'js/core.js']
     },
 
 
     jasmine: {
       pivotal: {
-        src: 'js/*.js',
+        src: 'js/dist.js',
         options: {
           specs: 'js/spec/*Spec.js',
           keepRunner: true
+        }
+      }
+    },
+
+    traceur: {
+      options: {
+        script: true,
+        'experimental': true,
+        'blockBinding': true,
+        'includeRuntime': true
+      },
+      custom: {
+        files: {
+          'js/dist.js': ['js/core.js']
         }
       }
     },
@@ -82,6 +93,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-traceur');
 
 
   // Register Tasks
