@@ -6,6 +6,8 @@
 
 document.addEventListener('DOMContentLoaded', function(e) {
 
+  'use strict';
+
   // config
   var pads           = document.querySelectorAll('.pad');
   var pulse_duration = 300;
@@ -22,4 +24,5 @@ document.addEventListener('DOMContentLoaded', function(e) {
       }, pulse_duration, this);
     });
   });
+
 });

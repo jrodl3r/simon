@@ -8,6 +8,8 @@ ehthumbs.db
 Thumbs.db
 
 #ENV
+*.grunt
 *.sass-cache
 app/node_modules
 app/css/*.css*
+app/_SpecRunner.html

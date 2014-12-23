@@ -32,6 +32,7 @@ module.exports = function(grunt) {
         boss: true,
         eqnull: false,
         browser: true,
+        esnext: true,
         globals: {
           "$": false,
           "jQuery": false,
@@ -47,14 +48,25 @@ module.exports = function(grunt) {
     },
 
 
+    jasmine: {
+      pivotal: {
+        src: 'js/*.js',
+        options: {
+          specs: 'js/spec/*Spec.js',
+          keepRunner: true
+        }
+      }
+    },
+
+
     watch: {
       sass: {
         files: ['css/**/*.scss'],
         tasks: ['sass:dist']
       },
       js: {
-        files: '<%= jshint.files %>',
-        tasks: ['jshint']
+        files: ['Gruntfile.js', 'js/**/*.js'],
+        tasks: ['jshint', 'jasmine']
       },
       options: {
         livereload: true
@@ -69,6 +81,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
 
   // Register Tasks
