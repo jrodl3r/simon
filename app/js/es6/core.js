@@ -2,25 +2,26 @@
 // Simon Core
 //
 // ==========================================================================
-
-
 'use strict';
 
-class Game {
-  constructor(name) {
-    this.name = name;
-  }
-}
+//
+// class Game {
+//   constructor(name) {
+//     this.name = name;
+//   }
+// }
+//
+// class Simon extends Game {
+//   constructor(name) {
+//     super.constructor(name);
+//     this.pads = ['pad1', 'pad2', 'pad3', 'pad4'];
+//   }
+// }
+//
+// var app = new Simon('simon game');
+// console.log(app.name);
 
-class Simon extends Game {
-  constructor(name) {
-    super.constructor(name);
-    this.pads = ['pad1', 'pad2', 'pad3', 'pad4'];
-  }
-}
 
-var app = new Simon('simon game');
-console.log(app.name);
 
 
 
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       this.className = 'pad active';
       //console.log(app.pads[this.getAttribute('padnum')]);
-      document.getElementById('hud').innerHTML = app.pads[this.getAttribute('padnum')];
+      //document.getElementById('hud').innerHTML = app.pads[this.getAttribute('padnum')];
 
       setTimeout(function(self) {
         self.className = 'pad';

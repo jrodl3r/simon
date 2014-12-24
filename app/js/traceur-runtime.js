@@ -2563,30 +2563,3 @@ System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/polyfills.js
   return {};
 });
 System.get("traceur-runtime@0.0.79/src/runtime/polyfills/polyfills.js" + '');
-'use strict';
-var Game = function Game(name) {
-  this.name = name;
-};
-($traceurRuntime.createClass)(Game, {}, {});
-var Simon = function Simon(name) {
-  $traceurRuntime.superGet(this, $Simon.prototype, "constructor").call(this, name);
-  this.pads = ['pad1', 'pad2', 'pad3', 'pad4'];
-};
-var $Simon = Simon;
-($traceurRuntime.createClass)(Simon, {}, {}, Game);
-var app = new Simon('simon game');
-console.log(app.name);
-var pads = document.querySelectorAll('.pad');
-var pulse_duration = 300;
-document.addEventListener('DOMContentLoaded', function() {
-  Array.prototype.forEach.call(pads, function(el, i) {
-    el.addEventListener('click', function() {
-      this.className = 'pad active';
-      document.getElementById('hud').innerHTML = app.pads[this.getAttribute('padnum')];
-      setTimeout(function(self) {
-        self.className = 'pad';
-      }, pulse_duration, this);
-    });
-  });
-});
-//# sourceURL=js/core.js

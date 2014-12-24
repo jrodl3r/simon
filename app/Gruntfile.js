@@ -35,36 +35,48 @@ module.exports = function(grunt) {
         esnext: true,
         globalstrict: true,
         globals: {
-          "console": false,
-          "window": true,
-          "debug": true,
-          "log": true,
+          'console': false,
+          'window': true,
+          'debug': true,
+          'log': true,
+          'describe': true,
+          'it': true,
+          'expect': true,
+          'sinon': true,
+          'stub': true,
+          'assert': true,
+          'before': true,
+          'beforeEach': true,
+          'afterEach': true
         }
       },
-      files: ['Gruntfile.js', 'js/core.js']
+      files: ['Gruntfile.js', 'js/es6/*.js']
     },
 
-
-    jasmine: {
-      pivotal: {
-        src: 'js/dist.js',
-        options: {
-          specs: 'js/spec/*Spec.js',
-          keepRunner: true
-        }
-      }
-    },
 
     traceur: {
       options: {
         script: true,
         'experimental': true,
-        'blockBinding': true,
-        'includeRuntime': true
+        'blockBinding': true
       },
       custom: {
-        files: {
-          'js/dist.js': ['js/core.js']
+        files: [{
+          expand: true,
+          cwd: 'js/es6',
+          src: ['core.js', 'test.js'],
+          dest: 'js/es5'
+        }]
+      }
+    },
+
+
+    jasmine: {
+      pivotal: {
+        src: 'js/es5/test.js',
+        options: {
+          helpers: 'js/traceur-runtime.js',
+          keepRunner: true
         }
       }
     },
@@ -76,8 +88,8 @@ module.exports = function(grunt) {
         tasks: ['sass:dist']
       },
       js: {
-        files: ['Gruntfile.js', 'js/**/*.js'],
-        tasks: ['jshint', 'jasmine']
+        files: ['Gruntfile.js', 'js/es6/*.js'],
+        tasks: ['jshint', 'traceur', 'jasmine']
       },
       options: {
         livereload: true
@@ -98,7 +110,7 @@ module.exports = function(grunt) {
 
   // Register Tasks
   // ----------------------------------------------------------
-  grunt.registerTask('default', ['sass:dist', 'jshint', 'watch']);
+  grunt.registerTask('default', ['sass:dist', 'jshint', 'traceur', 'jasmine', 'watch']);
 
 
   // Show Timer
