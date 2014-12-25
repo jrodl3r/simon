@@ -73,7 +73,7 @@ module.exports = function(grunt) {
 
     jasmine: {
       pivotal: {
-        src: 'js/es5/test.js',
+        src: 'js/es5/*.js',
         options: {
           helpers: 'js/traceur-runtime.js',
           keepRunner: true

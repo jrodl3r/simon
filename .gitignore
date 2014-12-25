@@ -12,4 +12,5 @@ Thumbs.db
 *.sass-cache
 app/node_modules
 app/css/*.css*
+app/js/es5/*.js
 app/_SpecRunner.html
