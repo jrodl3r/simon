@@ -40,6 +40,7 @@ body {
   height: 471px;
   margin: 3% auto 0;
   border-radius: 50%;
+  box-shadow: 0 0 60px rgba(#000, 0.3);
   overflow: hidden;
 
   #pads {
@@ -53,6 +54,7 @@ body {
     height: 100%;
     border-radius: 50%;
     overflow: hidden;
+    transition: all 0.3s;
     mask: inline-svg-image('../img/pad-mask.svg', '#mask');
     -webkit-mask: inline-svg-image('../img/pad-mask.svg', '');
 
@@ -61,7 +63,7 @@ body {
       width: 50%;
       height: 50%;
       cursor: -webkit-grab;
-      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-tap-highlight-color: rgba(#000, 0);
 
       &.active {
         @include animation(pulse $pulse-duration ease-in 1);
@@ -69,19 +71,35 @@ body {
 
       &#pad1 {
         background: $green radial-gradient(circle at bottom right, $green-light, $green-dark 40%, $green-dark 55%, $green-light 100%);
+
+        .no-touch &:hover {
+          background: $green-dark;
+        }
       }
 
       &#pad2 {
         background: $red radial-gradient(circle at bottom left, $red-light, $red-dark 40%, $red-dark 55%, $red-light 100%);
+
+        .no-touch &:hover {
+          background: $red-dark;
+        }
       }
 
       &#pad3 {
         float: right;
         background: $blue radial-gradient(circle at top left, $blue-light, $blue-dark 40%, $blue-dark 55%, $blue-light 100%);
+
+        .no-touch &:hover {
+          background: $blue-dark;
+        }
       }
 
       &#pad4 {
         background: $yellow radial-gradient(circle at top right, $yellow-light, $yellow-dark 40%, $yellow-dark 55%, $yellow-light 100%);
+
+        .no-touch &:hover {
+          background: $yellow-dark;
+        }
 
         &.active {
           @include animation(pulse-alt $pulse-duration ease-in 1);
@@ -101,13 +119,13 @@ body {
 
 @include keyframes(pulse) {
   0% { opacity: 1 }
-  50% { opacity: 0.65 }
+  50% { opacity: 0.4 }
   100% { opacity: 1 }
 }
 
 @include keyframes(pulse-alt) {
   0% { opacity: 1 }
-  50% { opacity: 0.5 }
+  50% { opacity: 0.25 }
   100% { opacity: 1 }
 }
 

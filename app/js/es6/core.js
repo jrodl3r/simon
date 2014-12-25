@@ -4,6 +4,19 @@
 // ==========================================================================
 'use strict';
 
+// debug logger
+var debug = true;
+function log(s) {
+  if(debug) { console.log(s); }
+}
+
+// touch detector
+if (!("ontouchstart" in document.documentElement)) {
+  document.documentElement.className += " no-touch";
+}
+
+
+// the game
 class Game {
   constructor(name) {
     this.name = name;
@@ -18,7 +31,7 @@ class Simon extends Game {
 }
 
 let app = new Simon('Simon Game');
-console.log(app.name);
+log(app.name);
 
 
 
@@ -40,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     el.addEventListener('click', function() {
 
       this.className = 'pad active';
-      //console.log(app.pads[this.getAttribute('padnum')]);
+      log(app.pads[this.getAttribute('padnum')]);
       document.getElementById('hud').innerHTML = app.pads[this.getAttribute('padnum')];
 
       setTimeout(function(self) {
