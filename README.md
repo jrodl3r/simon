@@ -8,6 +8,6 @@ Web-based version of the classic electronic memory game from the 70's & 80's. ([
 * Automation (Grunt)
 
 ### Setup
-$ npm install --save-dev
-$ grunt
-$ server
+    $ npm install --save-dev
+    $ grunt
+    $ server
