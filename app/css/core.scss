@@ -6,10 +6,18 @@
 @import 'compass/css3';
 
 
-$green              : #39B54A;
-$red                : #ED1C24;
-$blue               : #0055FF;
-$yellow             : #FCEE21;
+$green              : #1BB545;
+$green-light        : lighten($green, 8%);
+$green-dark         : darken($green, 8%);
+$red                : #FC1D2B;
+$red-light          : lighten($red, 10%);
+$red-dark           : darken($red, 18%);
+$blue               : #105BfB;
+$blue-light         : lighten($blue, 10%);
+$blue-dark          : darken($blue, 10%);
+$yellow             : #FEEC35;
+$yellow-light       : lighten($yellow, 20%);
+$yellow-dark        : darken($yellow, 18%);
 
 $pulse-duration     : .3s;
 
@@ -60,23 +68,24 @@ body {
       }
 
       &#pad1 {
-        background: $green radial-gradient(circle at bottom right, $green, darken($green, 14%) 40%, darken($green, 14%) 55%, $green 100%);
+        background: $green radial-gradient(circle at bottom right, $green-light, $green-dark 40%, $green-dark 55%, $green-light 100%);
       }
 
       &#pad2 {
-        background: $red radial-gradient(circle at bottom left, lighten($red, 7%), darken($red, 17%) 40%, darken($red, 17%) 55%, lighten($red, 7%) 100%);
+        background: $red radial-gradient(circle at bottom left, $red-light, $red-dark 40%, $red-dark 55%, $red-light 100%);
       }
 
       &#pad3 {
-        background: $yellow radial-gradient(circle at top right, lighten($yellow, 15%), darken($yellow, 18%) 40%, darken($yellow, 18%) 55%, lighten($yellow, 15%) 100%);
+        float: right;
+        background: $blue radial-gradient(circle at top left, $blue-light, $blue-dark 40%, $blue-dark 55%, $blue-light 100%);
+      }
+
+      &#pad4 {
+        background: $yellow radial-gradient(circle at top right, $yellow-light, $yellow-dark 40%, $yellow-dark 55%, $yellow-light 100%);
 
         &.active {
           @include animation(pulse-alt $pulse-duration ease-in 1);
         }
-      }
-
-      &#pad4 {
-        background: $blue radial-gradient(circle at top left, lighten($blue, 10%), darken($blue, 13%) 40%, darken($blue, 13%) 55%, lighten($blue, 10%) 100%);
       }
     }
   }
@@ -98,7 +107,7 @@ body {
 
 @include keyframes(pulse-alt) {
   0% { opacity: 1 }
-  50% { opacity: 0.54 }
+  50% { opacity: 0.5 }
   100% { opacity: 1 }
 }
 
