@@ -10,14 +10,14 @@ $green              : #1BB545;
 $green-light        : lighten($green, 8%);
 $green-dark         : darken($green, 8%);
 $red                : #FC1D2B;
-$red-light          : lighten($red, 10%);
+$red-light          : lighten($red, 12%);
 $red-dark           : darken($red, 18%);
 $blue               : #105BfB;
-$blue-light         : lighten($blue, 10%);
+$blue-light         : lighten($blue, 12%);
 $blue-dark          : darken($blue, 10%);
 $yellow             : #FEEC35;
-$yellow-light       : lighten($yellow, 20%);
-$yellow-dark        : darken($yellow, 18%);
+$yellow-light       : lighten($yellow, 21%);
+$yellow-dark        : darken($yellow, 19%);
 
 $pulse-duration     : .3s;
 
@@ -25,6 +25,7 @@ $pulse-duration     : .3s;
 body {
   margin: 0;
   padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 #app {
@@ -70,6 +71,7 @@ body {
       }
 
       &#pad1 {
+        border-radius: 100% 0 0 0;
         background: $green radial-gradient(circle at bottom right, $green-light, $green-dark 40%, $green-dark 55%, $green-light 100%);
 
         .no-touch &:hover {
@@ -78,6 +80,7 @@ body {
       }
 
       &#pad2 {
+        border-radius: 0 100% 0 0;
         background: $red radial-gradient(circle at bottom left, $red-light, $red-dark 40%, $red-dark 55%, $red-light 100%);
 
         .no-touch &:hover {
@@ -87,6 +90,7 @@ body {
 
       &#pad3 {
         float: right;
+        border-radius: 0 0 100% 0;
         background: $blue radial-gradient(circle at top left, $blue-light, $blue-dark 40%, $blue-dark 55%, $blue-light 100%);
 
         .no-touch &:hover {
@@ -95,14 +99,11 @@ body {
       }
 
       &#pad4 {
+        border-radius: 0 0 0 100%;
         background: $yellow radial-gradient(circle at top right, $yellow-light, $yellow-dark 40%, $yellow-dark 55%, $yellow-light 100%);
 
         .no-touch &:hover {
           background: $yellow-dark;
-        }
-
-        &.active {
-          @include animation(pulse-alt $pulse-duration ease-in 1);
         }
       }
     }
@@ -123,17 +124,56 @@ body {
   100% { opacity: 1 }
 }
 
-@include keyframes(pulse-alt) {
-  0% { opacity: 1 }
-  50% { opacity: 0.25 }
-  100% { opacity: 1 }
-}
-
-
-
 #hud {
-  display: block;
-  position: fixed;
-  top: 0;
-  right: 0;
+  position: absolute;
+  z-index: 3;
+  top: 150px;
+  left: 150px;
+  height: 170px;
+  width: 170px;
+  text-align: center;
+  background: inline-svg-image('../img/logo.svg', '') center 50px no-repeat;
+  background-size: 55%;
+  border-radius: 50%;
+
+  #display {
+    position: relative;
+    top: 52%;
+    color: #999;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-shadow: 0 0 1px rgba(#000, 0.3);
+    cursor: default;
+  }
+
+  a#start {
+    position: relative;
+    top: 102px;
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    color: #000;
+    font-size: 6px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: radial-gradient(circle at center, darken(#F00, 5%) 10%, darken(#F00, 10%) 50%);
+    border-radius: 50%;
+    border: 2px solid #000;
+
+    &:hover {
+      background: radial-gradient(circle at center, darken(#F00, 2%) 10%, darken(#F00, 13%) 50%);
+    }
+
+    &:before {
+      position: relative;
+      margin-left: -19px;
+      text-align: center;
+      display: block;
+      top: -10px;
+      width: 56px;
+      content: 'Start';
+    }
+  }
 }
