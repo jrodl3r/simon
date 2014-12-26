@@ -139,17 +139,17 @@ body {
   #display {
     position: relative;
     top: 52%;
-    color: #999;
-    font-size: 11px;
-    font-weight: 800;
+    color: rgba(#000, 0.2);
+    font-family: 'bd-brick', fantasy;
+    font-size: 20px;
+    font-weight: 500;
     text-transform: uppercase;
-    text-shadow: 0 0 1px rgba(#000, 0.3);
     cursor: default;
   }
 
   a#start {
     position: relative;
-    top: 102px;
+    top: 100px;
     display: inline-block;
     height: 18px;
     width: 18px;
@@ -164,6 +164,10 @@ body {
 
     &:hover {
       background: radial-gradient(circle at center, darken(#F00, 2%) 10%, darken(#F00, 13%) 50%);
+    }
+
+    &:active {
+      background: radial-gradient(circle at center, darken(#F00, 10%) 10%, darken(#F00, 13%) 50%);
     }
 
     &:before {

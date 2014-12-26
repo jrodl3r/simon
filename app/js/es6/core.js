@@ -37,7 +37,7 @@ class Simon extends Game {
     super(name);
 
 
-    this.pads = ['pad 1', 'pad 2', 'pad 3', 'pad 4'];
+    this.pads = ['pad 01', 'pad 02', 'pad 03', 'pad 04'];
   }
 }
 
