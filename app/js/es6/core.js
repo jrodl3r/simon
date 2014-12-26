@@ -4,34 +4,45 @@
 // ==========================================================================
 'use strict';
 
-// debug logger
+
+// --------------------------------------------------------------------------
+// Utilities
+// --------------------------------------------------------------------------
+
+// logger
 var debug = true;
 function log(s) {
   if(debug) { console.log(s); }
 }
 
-// touch detector
+// detect touch
 if (!("ontouchstart" in document.documentElement)) {
   document.documentElement.className += " no-touch";
 }
 
 
-// the game
+// --------------------------------------------------------------------------
+// The Game
+// --------------------------------------------------------------------------
+
 class Game {
   constructor(name) {
     this.name = name;
+    log('Loading ' + name + '...');
   }
 }
 
 class Simon extends Game {
   constructor(name) {
-    super.constructor(name);
-    this.pads = ['pad1', 'pad2', 'pad3', 'pad4'];
+    super(name);
+
+
+    this.pads = ['pad 1', 'pad 2', 'pad 3', 'pad 4'];
   }
 }
 
-let app = new Simon('Simon Game');
-log(app.name);
+let app = new Simon('Simon');
+// log(app.name);
 
 
 
@@ -54,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       this.className = 'pad active';
       log(app.pads[this.getAttribute('padnum')]);
-      document.getElementById('hud').innerHTML = app.pads[this.getAttribute('padnum')];
+      document.getElementById('display').innerHTML = app.pads[this.getAttribute('padnum')];
 
       setTimeout(function(self) {
         self.className = 'pad';

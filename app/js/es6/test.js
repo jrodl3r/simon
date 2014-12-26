@@ -1,21 +1,19 @@
-/*global app */
 'use strict';
 
-describe('This', function() {
+describe('The Game', function() {
 
-  it('is a sanity test', function() {
+  // it('is a sanity test', function() {
+  //
+  //   expect(true).toBe(true);
+  // });
 
-    expect(true).toBe(true);
-  });
+  it('has a correct name', () => {
 
-  it('is an arrow function test', () => {
 
-    expect(true).toBe(true);
-  });
-
-  it('is an es6 class test', () => {
-
-    expect(app.name).toBe('Simon Game');
+    expect(app.name).toBe('Simon');
+    // log(app.name);
+    // expect(app.pads.length).toBe(4);
+    // log(app.pads.length);
 
   });
 });

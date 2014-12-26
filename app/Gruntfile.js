@@ -35,6 +35,7 @@ module.exports = function(grunt) {
         esnext: true,
         globalstrict: true,
         globals: {
+          'app': true,
           'console': false,
           'window': true,
           'debug': true,
