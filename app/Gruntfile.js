@@ -33,13 +33,16 @@ module.exports = function(grunt) {
         eqnull: false,
         browser: true,
         esnext: true,
+        debug: true,
         globalstrict: true,
         globals: {
+          '$': false,
           'app': true,
           'console': false,
           'window': true,
           'debug': true,
           'log': true,
+          'jasmine': false,
           'describe': true,
           'it': true,
           'expect': true,
@@ -48,7 +51,10 @@ module.exports = function(grunt) {
           'assert': true,
           'before': true,
           'beforeEach': true,
-          'afterEach': true
+          'afterEach': true,
+          'spyOn': true,
+          'spyOnEvent': true,
+          'Simon': false,
         }
       },
       files: ['Gruntfile.js', 'js/es6/*.js']
@@ -76,7 +82,7 @@ module.exports = function(grunt) {
       pivotal: {
         src: 'js/es5/*.js',
         options: {
-          helpers: 'js/traceur-runtime.js',
+          helpers: ['js/traceur-runtime.js', 'js/jquery.js', 'js/jasmine-jquery.js'],
           keepRunner: true
         }
       }
