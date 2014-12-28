@@ -6,18 +6,21 @@
 
 
 // --------------------------------------------------------------------------
-// Utilities
+// Utils
 // --------------------------------------------------------------------------
 
-// logger
-var debug = true;
-function log(s) {
-  if(debug) { console.log(s); }
-}
+// debug logger
+var local_debug = true;
+var log = function(s) {
+  if(local_debug) { console.log(s); }
+};
+log.error = function(s) {
+  if(local_debug) { console.error(s); }
+};
 
 // detect touch
-if (!("ontouchstart" in document.documentElement)) {
-  document.documentElement.className += " no-touch";
+if (!('ontouchstart' in document.documentElement)) {
+  document.documentElement.className += ' no-touch';
 }
 
 
@@ -26,51 +29,135 @@ if (!("ontouchstart" in document.documentElement)) {
 // --------------------------------------------------------------------------
 
 class Game {
+
   constructor(name) {
-    this.name = name;
-    log('Loading ' + name + '...');
+    this._name = name;
+    //log(this._name);
   }
+
+  // getName() « 'xxx' input
+
+  // saveScore(name) XHR »
+
+  // getScores() « list XHR
+
+  // showScores()
 }
 
 class Simon extends Game {
+
   constructor(name) {
     super(name);
 
+    this._moves         = [];
+    this._level         = 0;
+    this._playing       = false;
+    this._cycling       = false;
+    this._pads          = $('.pad');
+    this._start_btn     = $('#start');
+    this._pulse_dur     = 300;
+    this._seqence_dur   = 800;
 
-    this.pads = ['pad 01', 'pad 02', 'pad 03', 'pad 04'];
+    this.interact();
+  }
+
+  // user input
+  interact() {
+
+    // start button
+    this._start_btn.on('click', () => {
+      this.play();
+    });
+
+    // pads
+    this._pads.on('click', (event) => {
+      this.pulse('user', $(event.currentTarget));
+    });
+  }
+
+  // start game
+  play() {
+
+    // generate moves
+    for(let i = 0, j = 3; i < 100; i++) {
+      this._moves.push(Math.round(Math.random() * j));
+    }
+
+    // reset
+    this._playing = true;
+    this.level(1);
+
+    // launch
+    //cycle();
+
+  }
+
+  // display move sequence
+  cycle() {
+
+    // disable input
+    this._cycling = true;
+
+    // for(i < level) { trigger(sequence[i]) }
+
+  }
+
+  // verify move
+  update(pad_id) {
+    log(pad_id);
+
+    // check pad_id against moves[cur]
+
+      // if pad_id !== moves[cur] ... lose()
+
+      // if pad_id === moves[cur] ... next()
+
+  }
+
+  // queue next move
+  next() {
+
+    // if moves[cur] = level ... level('up')
+
+    // else moves[cur] ++
+
+  }
+
+  // game over
+  lose() {
+
+    // show game end outro
+    
+  }
+
+
+
+  level(level) {
+
+    this._level = level;
+
+  }
+
+
+  // make pad flash
+  pulse(type, el) {
+
+    // user input
+    if(type === 'user') {
+      if(!this._cycling) {
+        el.addClass('active');
+        this.update(el.attr('padnum'));
+        setTimeout(function(self) {
+          self.removeClass('active');
+        }, this._pulse_dur, el);
+      }
+
+    // sequence cycle
+    } else {
+      // ...
+    }
   }
 }
 
 let app = new Simon('Simon');
-// log(app.name);
-
-
-
-
-
-
-
-
-// config
-var pads           = document.querySelectorAll('.pad');
-var pulse_duration = 300;
-
-
-document.addEventListener('DOMContentLoaded', function() {
-
-  // setup pads (click/tap effect)
-  Array.prototype.forEach.call(pads, function(el, i) {
-
-    el.addEventListener('click', function() {
-
-      this.className = 'pad active';
-      log(app.pads[this.getAttribute('padnum')]);
-      document.getElementById('display').innerHTML = app.pads[this.getAttribute('padnum')];
-
-      setTimeout(function(self) {
-        self.className = 'pad';
-      }, pulse_duration, this);
-    });
-  });
-
-});
+// $(document).ready(function(){});

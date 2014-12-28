@@ -12,21 +12,10 @@
 </head>
 <body>
   <div id="app">
-    <div id="board">
-      <div id="hud">
-        <div id="display">Level 01</div>
-        <a href="#0" id="start"></a>
-      </div>
-      <div id="pads">
-        <div class="pad" id="pad1" padnum="0"></div>
-        <div class="pad" id="pad2" padnum="1"></div>
-        <div class="pad" id="pad3" padnum="2"></div>
-        <div class="pad" id="pad4" padnum="3"></div>
-      </div>
-      <div id="trim"></div>
-    </div>
+    <?php include('inc/board.html') ?>
   </div>
   <script src="js/traceur-runtime.js"></script>
+  <script src="js/jquery.js"></script>
   <script src="js/es5/core.js"></script>
 </body>
 </html>
