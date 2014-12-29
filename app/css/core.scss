@@ -43,85 +43,79 @@ body {
   border-radius: 50%;
   box-shadow: 0 0 60px rgba(#000, 0.3);
   overflow: hidden;
+}
 
-  #pads {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    transition: all 0.3s;
-    mask: inline-svg-image('../img/pad-mask.svg', '#mask');
-    -webkit-mask: inline-svg-image('../img/pad-mask.svg', '');
+#pads {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.3s;
+  mask: inline-svg-image('../img/pad-mask.svg', '#mask');
+  -webkit-mask: inline-svg-image('../img/pad-mask.svg', '');
+}
 
-    .pad {
-      float: left;
-      width: 50%;
-      height: 50%;
-      cursor: -webkit-grab;
-      -webkit-tap-highlight-color: rgba(#000, 0);
+.pad {
+  float: left;
+  width: 50%;
+  height: 50%;
+  cursor: -webkit-grab;
+  -webkit-tap-highlight-color: rgba(#000, 0);
 
-      &.active {
-        @include animation(pulse $pulse-duration ease-in 1);
-      }
-
-      &#pad1 {
-        border-radius: 100% 0 0 0;
-        background: $green radial-gradient(circle at bottom right, $green-light, $green-dark 40%, $green-dark 55%, $green-light 100%);
-
-        .no-touch &:hover {
-          background: $green-dark;
-        }
-      }
-
-      &#pad2 {
-        border-radius: 0 100% 0 0;
-        background: $red radial-gradient(circle at bottom left, $red-light, $red-dark 40%, $red-dark 55%, $red-light 100%);
-
-        .no-touch &:hover {
-          background: $red-dark;
-        }
-      }
-
-      &#pad3 {
-        float: right;
-        border-radius: 0 0 100% 0;
-        background: $blue radial-gradient(circle at top left, $blue-light, $blue-dark 40%, $blue-dark 55%, $blue-light 100%);
-
-        .no-touch &:hover {
-          background: $blue-dark;
-        }
-      }
-
-      &#pad4 {
-        border-radius: 0 0 0 100%;
-        background: $yellow radial-gradient(circle at top right, $yellow-light, $yellow-dark 40%, $yellow-dark 55%, $yellow-light 100%);
-
-        .no-touch &:hover {
-          background: $yellow-dark;
-        }
-      }
-    }
-  }
-
-  #trim {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: inline-svg-image('../img/board.svg', '') center no-repeat;
-    background-size: cover;
+  &.active {
+    @include animation(pulse $pulse-duration ease-in 1);
   }
 }
 
-@include keyframes(pulse) {
-  0% { opacity: 1 }
-  50% { opacity: 0.4 }
-  100% { opacity: 1 }
+#pad1 {
+  border-radius: 100% 0 0 0;
+  background: $green radial-gradient(circle at bottom right, $green-light, $green-dark 40%, $green-dark 55%, $green-light 100%);
+
+  .no-touch &:hover {
+    background: $green-dark;
+  }
+}
+
+#pad2 {
+  border-radius: 0 100% 0 0;
+  background: $red radial-gradient(circle at bottom left, $red-light, $red-dark 40%, $red-dark 55%, $red-light 100%);
+
+  .no-touch &:hover {
+    background: $red-dark;
+  }
+}
+
+#pad3 {
+  float: right;
+  border-radius: 0 0 100% 0;
+  background: $blue radial-gradient(circle at top left, $blue-light, $blue-dark 40%, $blue-dark 55%, $blue-light 100%);
+
+  .no-touch &:hover {
+    background: $blue-dark;
+  }
+}
+
+#pad4 {
+  border-radius: 0 0 0 100%;
+  background: $yellow radial-gradient(circle at top right, $yellow-light, $yellow-dark 40%, $yellow-dark 55%, $yellow-light 100%);
+
+  .no-touch &:hover {
+    background: $yellow-dark;
+  }
+}
+
+#trim {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inline-svg-image('../img/board.svg', '') center no-repeat;
+  background-size: cover;
 }
 
 #hud {
@@ -135,49 +129,55 @@ body {
   background: inline-svg-image('../img/logo.svg', '') center 50px no-repeat;
   background-size: 55%;
   border-radius: 50%;
+}
 
-  #display {
-    position: relative;
-    top: 52%;
-    color: rgba(#000, 0.2);
-    font-family: 'bd-brick', fantasy;
-    font-size: 20px;
-    font-weight: 500;
-    text-transform: uppercase;
-    cursor: default;
+#display {
+  position: relative;
+  top: 52%;
+  color: rgba(#000, 0.2);
+  font-family: 'bd-brick', fantasy;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+a#start {
+  position: relative;
+  top: 100px;
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+  color: #000;
+  font-size: 6px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: radial-gradient(circle at center, darken(#F00, 5%) 10%, darken(#F00, 10%) 50%);
+  border-radius: 50%;
+  border: 2px solid #000;
+
+  &:hover {
+    background: radial-gradient(circle at center, darken(#F00, 2%) 10%, darken(#F00, 13%) 50%);
   }
 
-  a#start {
-    position: relative;
-    top: 100px;
-    display: inline-block;
-    height: 18px;
-    width: 18px;
-    color: #000;
-    font-size: 6px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
-    background: radial-gradient(circle at center, darken(#F00, 5%) 10%, darken(#F00, 10%) 50%);
-    border-radius: 50%;
-    border: 2px solid #000;
-
-    &:hover {
-      background: radial-gradient(circle at center, darken(#F00, 2%) 10%, darken(#F00, 13%) 50%);
-    }
-
-    &:active {
-      background: radial-gradient(circle at center, darken(#F00, 10%) 10%, darken(#F00, 13%) 50%);
-    }
-
-    &:before {
-      position: relative;
-      margin-left: -19px;
-      text-align: center;
-      display: block;
-      top: -10px;
-      width: 56px;
-      content: 'Start';
-    }
+  &:active {
+    background: radial-gradient(circle at center, darken(#F00, 10%) 10%, darken(#F00, 13%) 50%);
   }
+
+  &:before {
+    position: relative;
+    margin-left: -19px;
+    text-align: center;
+    display: block;
+    top: -10px;
+    width: 56px;
+    content: 'Start';
+  }
+}
+
+@include keyframes(pulse) {
+  0% { opacity: 1 }
+  50% { opacity: 0.4 }
+  100% { opacity: 1 }
 }
