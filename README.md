@@ -7,6 +7,6 @@ Web-based version of the classic electronic memory game from the 70's & 80's. ([
 * ES6-Harmony Classes, Arrow Functions, Let, etc. (Traceur)
 
 ### Setup
-    $ npm install --save-dev
+    $ npm install
     $ grunt
     $ server

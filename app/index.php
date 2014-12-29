@@ -12,7 +12,7 @@
 </head>
 <body>
   <div id="app">
-    <?php include('inc/board.html') ?>
+    <?php include 'inc/board.html'; ?>
   </div>
   <script src="js/traceur-runtime.js"></script>
   <script src="js/jquery.js"></script>
