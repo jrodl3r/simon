@@ -56,7 +56,7 @@ class Simon extends Game {
     this._pads          = $('.pad');
     this._start_btn     = $('#start');
     this._pulse_dur     = 300;
-    this._seqence_dur   = 800;
+    this._seqence_dur   = 1000;
 
     this.interact();
   }
@@ -65,41 +65,61 @@ class Simon extends Game {
   interact() {
 
     // start button
-    this._start_btn.on('click', () => {
+    this._start_btn.on('click', (e) => {
+      e.preventDefault();
       this.play();
     });
 
     // pads
-    this._pads.on('click', (event) => {
-      this.pulse('user', $(event.currentTarget));
+    this._pads.on('click', (e) => {
+      this.pulse('user', $(e.currentTarget));
     });
   }
 
   // start game
   play() {
 
-    // generate moves
+    // generate moves TODO
     for(let i = 0, j = 3; i < 100; i++) {
       this._moves.push(Math.round(Math.random() * j));
     }
 
-    // reset
+    // reset settings
     this._playing = true;
     this.level(1);
 
-    // launch
-    //cycle();
+    // start sequence
+    this.cycle();
 
   }
 
   // display move sequence
   cycle() {
+                                  this.level(10);
+                                  log(this._moves);
+
+    // show "READY?"
 
     // disable input
     this._cycling = true;
 
-    // for(i < level) { trigger(sequence[i]) }
+    // start sequence
+    let i = this._level;
+    while(i) {
+      setTimeout((x) => {
+        this.pulse('cycle', this._pads.eq(this._moves[this._level - x]));
+      }, ((this._level - i) + 1) * this._seqence_dur, i);
+      i--;
+      // end sequence &
+      if(!i) {
+        this._cycling = false;
 
+        // show "GO!"
+
+        // start timer / show "5", "4", "3", "2", "1"
+
+      }
+    }
   }
 
   // verify move
@@ -127,7 +147,7 @@ class Simon extends Game {
   lose() {
 
     // show game end outro
-    
+
   }
 
 
@@ -145,6 +165,7 @@ class Simon extends Game {
     // user input
     if(type === 'user') {
       if(!this._cycling) {
+        log(this._cycling);
         el.addClass('active');
         this.update(el.attr('padnum'));
         setTimeout(function(self) {
@@ -152,9 +173,13 @@ class Simon extends Game {
         }, this._pulse_dur, el);
       }
 
-    // sequence cycle
+    // cycle moves
     } else {
-      // ...
+      el.addClass('active');
+      this.update(el.attr('padnum'));
+      setTimeout(function(self) {
+        self.removeClass('active');
+      }, this._pulse_dur, el);
     }
   }
 }
