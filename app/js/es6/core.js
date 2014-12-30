@@ -55,6 +55,7 @@ class Simon extends Game {
     this._cycling       = false;
     this._pads          = $('.pad');
     this._start_btn     = $('#start');
+    this._display       = $('#display');
     this._pulse_dur     = 300;
     this._seqence_dur   = 1000;
 
@@ -95,30 +96,26 @@ class Simon extends Game {
 
   // display move sequence
   cycle() {
-                                  this.level(10);
-                                  log(this._moves);
 
-    // show "READY?"
-
-    // disable input
+    // disable input, queue user
+    this.display('READY?', this._seqence_dur);
     this._cycling = true;
 
     // start sequence
     let i = this._level;
+
     while(i) {
       setTimeout((x) => {
         this.pulse('cycle', this._pads.eq(this._moves[this._level - x]));
+
+        // last cycle: enable input, queue user
+        if(x === 1) {
+          this._cycling = false;
+          this.display('GO!', this._seqence_dur * 2);
+          // TODO start timer .... show "5", "4", "3", "2", "1"
+        }
       }, ((this._level - i) + 1) * this._seqence_dur, i);
       i--;
-      // end sequence &
-      if(!i) {
-        this._cycling = false;
-
-        // show "GO!"
-
-        // start timer / show "5", "4", "3", "2", "1"
-
-      }
     }
   }
 
@@ -151,11 +148,10 @@ class Simon extends Game {
   }
 
 
-
+  // update level
   level(level) {
 
     this._level = level;
-
   }
 
 
@@ -165,21 +161,35 @@ class Simon extends Game {
     // user input
     if(type === 'user') {
       if(!this._cycling) {
-        log(this._cycling);
         el.addClass('active');
         this.update(el.attr('padnum'));
-        setTimeout(function(self) {
-          self.removeClass('active');
-        }, this._pulse_dur, el);
+        setTimeout(() => {
+          el.removeClass('active');
+        }, this._pulse_dur);
       }
 
-    // cycle moves
+    // cycling moves
     } else {
       el.addClass('active');
       this.update(el.attr('padnum'));
-      setTimeout(function(self) {
-        self.removeClass('active');
-      }, this._pulse_dur, el);
+      setTimeout(() => {
+        el.removeClass('active');
+      }, this._pulse_dur);
+    }
+  }
+
+  // update hud display
+  display(str, dur) {
+    if(str) {
+      this._display.html(str);
+    } else {
+      this._display.html('&nbsp;');
+    }
+    // clear after duration
+    if(dur) {
+      setTimeout(() => {
+        this.display(0);
+      }, dur);
     }
   }
 }
