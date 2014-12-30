@@ -32,14 +32,13 @@ class Game {
 
   constructor(name) {
     this._name = name;
-    //log(this._name);
   }
 
-  // getName() « 'xxx' input
+  // getName() « 'xxx'
 
   // saveScore(name) XHR »
 
-  // getScores() « list XHR
+  // getScores() « XHR
 
   // showScores()
 }
@@ -49,8 +48,8 @@ class Simon extends Game {
   constructor(name) {
     super(name);
 
-    this._moves         = [];
     this._level         = 0;
+    this._max_level     = 100;
     this._playing       = false;
     this._cycling       = false;
     this._pads          = $('.pad');
@@ -58,6 +57,11 @@ class Simon extends Game {
     this._display       = $('#display');
     this._pulse_dur     = 300;
     this._seqence_dur   = 1000;
+    this._message_dur   = 1000;
+    this._move_dur      = 5000;
+    this._timer         = [];
+    this._moves         = [];
+    this._cur_move      = 0;
 
     this.interact();
   }
@@ -73,23 +77,27 @@ class Simon extends Game {
 
     // pads
     this._pads.on('click', (e) => {
-      this.pulse('user', $(e.currentTarget));
+      if(!this._cycling) {
+        this.pulse($(e.currentTarget));
+        this.update($(e.currentTarget).attr('padnum'));
+      }
     });
   }
 
   // start game
   play() {
 
-    // generate moves TODO
-    for(let i = 0, j = 3; i < 100; i++) {
-      this._moves.push(Math.round(Math.random() * j));
+    // generate moves
+    let x = this._max_level,
+        y = this._pads.length - 1;
+
+    while(x--) {
+      this._moves.push(Math.round(Math.random() * y));
     }
 
-    // reset settings
+    // reset & start sequence
     this._playing = true;
-    this.level(1);
-
-    // start sequence
+    this._level = 1;
     this.cycle();
 
   }
@@ -98,41 +106,81 @@ class Simon extends Game {
   cycle() {
 
     // disable input, queue user
-    this.display('READY?', this._seqence_dur);
+    this.display('READY?', this._message_dur);
     this._cycling = true;
 
     // start sequence
-    let i = this._level;
+this._level = 3; // TODO remove
+    let x = this._level;
 
-    while(i) {
-      setTimeout((x) => {
-        this.pulse('cycle', this._pads.eq(this._moves[this._level - x]));
+    while(x--) {
+      setTimeout((y) => {
+        this.pulse(this._pads.eq(this._moves[this._level - y]));
 
-        // last cycle: enable input, queue user
-        if(x === 1) {
+        // last cycle » re-enable input, queue user
+        if(y === 1) {
           this._cycling = false;
-          this.display('GO!', this._seqence_dur * 2);
-          // TODO start timer .... show "5", "4", "3", "2", "1"
+          setTimeout(() => {
+            this.display('GO!', this._message_dur * 2);
+            this.timer();
+          }, this._message_dur / 2);
         }
-      }, ((this._level - i) + 1) * this._seqence_dur, i);
-      i--;
+      }, (this._level - x) * this._seqence_dur, x + 1);
+    }
+  }
+
+  // game timer
+  timer(clear) {
+
+    let x = this._move_dur / 1000;
+
+    // clear timer
+    if(clear) {
+
+      while(x--) {
+        clearTimeout(app._timer[x]);
+        delete(app._timer[x]);
+      }
+
+    // start timer
+    } else {
+
+      while(x) {
+        this._timer[x - 1] = setTimeout((y) => {
+          log(y);
+          // times up!
+          if(y === this._move_dur / 1000) {
+            this.lose('times up!');
+          }
+        }, x * 1000, x--);
+      }
     }
   }
 
   // verify move
-  update(pad_id) {
-    log(pad_id);
+  update(pad) {
 
-    // check pad_id against moves[cur]
+    if(this._playing) {
 
-      // if pad_id !== moves[cur] ... lose()
+      // kill timer
+      this.timer(1);
+    // if(pad === this._moves[this._cur_move]) {
 
-      // if pad_id === moves[cur] ... next()
+      // this.next();
 
+    // } else {
+
+      // this.lose();
+
+    // }
+
+    }
   }
 
   // queue next move
   next() {
+
+    // this._cur_move ++
 
     // if moves[cur] = level ... level('up')
 
@@ -141,10 +189,15 @@ class Simon extends Game {
   }
 
   // game over
-  lose() {
+  lose(msg) {
+log('game over');
 
-    // show game end outro
+    this._playing = false;
+    this.display(msg, this._message_dur * 2);
 
+    setTimeout(() => {
+      this.display('game over', this._message_dur * 3);
+    }, this._message_dur * 2);
   }
 
 
@@ -155,36 +208,26 @@ class Simon extends Game {
   }
 
 
-  // make pad flash
-  pulse(type, el) {
+  // trigger flash
+  pulse(el) {
 
-    // user input
-    if(type === 'user') {
-      if(!this._cycling) {
-        el.addClass('active');
-        this.update(el.attr('padnum'));
-        setTimeout(() => {
-          el.removeClass('active');
-        }, this._pulse_dur);
-      }
-
-    // cycling moves
-    } else {
-      el.addClass('active');
-      this.update(el.attr('padnum'));
-      setTimeout(() => {
-        el.removeClass('active');
-      }, this._pulse_dur);
-    }
+    el.addClass('active');
+    setTimeout(() => {
+      el.removeClass('active');
+    }, this._pulse_dur);
   }
 
   // update hud display
-  display(str, dur) {
-    if(str) {
-      this._display.html(str);
+  display(msg, dur) {
+    // TODO add 'flashing' option (game over/win/etc)
+
+    // set or clear text
+    if(msg) {
+      this._display.html(msg);
     } else {
       this._display.html('&nbsp;');
     }
+
     // clear after duration
     if(dur) {
       setTimeout(() => {
