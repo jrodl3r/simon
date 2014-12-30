@@ -77,18 +77,18 @@ body {
   border-radius: 100% 0 0 0;
   background: $green radial-gradient(circle at bottom right, $green-light, $green-dark 40%, $green-dark 55%, $green-light 100%);
 
-  .no-touch &:hover {
+  /*.no-touch &:hover {
     background: $green-dark;
-  }
+  }*/
 }
 
 #pad2 {
   border-radius: 0 100% 0 0;
   background: $red radial-gradient(circle at bottom left, $red-light, $red-dark 40%, $red-dark 55%, $red-light 100%);
 
-  .no-touch &:hover {
+  /*.no-touch &:hover {
     background: $red-dark;
-  }
+  }*/
 }
 
 #pad3 {
@@ -96,18 +96,18 @@ body {
   border-radius: 0 0 100% 0;
   background: $blue radial-gradient(circle at top left, $blue-light, $blue-dark 40%, $blue-dark 55%, $blue-light 100%);
 
-  .no-touch &:hover {
+  /*.no-touch &:hover {
     background: $blue-dark;
-  }
+  }*/
 }
 
 #pad4 {
   border-radius: 0 0 0 100%;
   background: $yellow radial-gradient(circle at top right, $yellow-light, $yellow-dark 40%, $yellow-dark 55%, $yellow-light 100%);
 
-  .no-touch &:hover {
+  /*.no-touch &:hover {
     background: $yellow-dark;
-  }
+  }*/
 }
 
 #trim {
