@@ -65,6 +65,7 @@ body {
   float: left;
   width: 50%;
   height: 50%;
+  cursor: pointer;
   cursor: -webkit-grab;
   -webkit-tap-highlight-color: rgba(#000, 0);
 
@@ -133,9 +134,11 @@ body {
 
 #display {
   position: relative;
-  top: 52%;
+  top: 82px;
+  height: 25px;
+  line-height: 25px;
   color: rgba(#000, 0.2);
-  font-family: 'bd-brick', fantasy;
+  font-family: 'bd-brick';
   font-size: 20px;
   font-weight: 500;
   text-transform: uppercase;
@@ -144,7 +147,7 @@ body {
 
 a#start {
   position: relative;
-  top: 100px;
+  top: 90px;
   display: inline-block;
   height: 18px;
   width: 18px;
