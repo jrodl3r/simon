@@ -48,7 +48,6 @@ class Simon extends Game {
   constructor(name) {
     super(name);
 
-    this._level         = 0;
     this._max_level     = 100;
     this._playing       = false;
     this._cycling       = false;
@@ -59,11 +58,27 @@ class Simon extends Game {
     this._seqence_dur   = 1000;
     this._message_dur   = 1000;
     this._move_dur      = 5000;
+
+    this.init();
+    this.interact();
+  }
+
+  // reset
+  init() {
+
+    // reset & start sequence
+    this._level         = 1;
     this._timer         = [];
     this._moves         = [];
     this._cur_move      = 0;
 
-    this.interact();
+    // generate moves
+    let x = this._max_level,
+    y = this._pads.length - 1;
+
+    while(x--) {
+      this._moves.push(Math.round(Math.random() * y));
+    }
   }
 
   // user input
@@ -87,32 +102,26 @@ class Simon extends Game {
   // start game
   play() {
 
-    // generate moves
-    let x = this._max_level,
-        y = this._pads.length - 1;
-
-    while(x--) {
-      this._moves.push(Math.round(Math.random() * y));
-    }
-
-    // reset & start sequence
     this._playing = true;
-    this._level = 1;
+    this.init();
     this.cycle();
-
   }
 
-  // display move sequence
+  // reveal sequence
   cycle() {
 
-    // disable input, queue user
-    this.display('READY?', this._message_dur);
-    this._cycling = true;
-
-    // start sequence
-this._level = 3; // TODO remove
     let x = this._level;
 
+    // disable input, queue user
+    this._cycling = true;
+
+    if(this._level > 1) {
+      this.display('level ' + this._level);
+    } else {
+      this.display('ready?', this._message_dur);
+    }
+
+    // start sequence
     while(x--) {
       setTimeout((y) => {
         this.pulse(this._pads.eq(this._moves[this._level - y]));
@@ -121,8 +130,8 @@ this._level = 3; // TODO remove
         if(y === 1) {
           this._cycling = false;
           setTimeout(() => {
-            this.display('GO!', this._message_dur * 2);
-            this.timer();
+            this.display('go!', this._message_dur * 2);
+            this.timer(1);
           }, this._message_dur / 2);
         }
       }, (this._level - x) * this._seqence_dur, x + 1);
@@ -130,68 +139,70 @@ this._level = 3; // TODO remove
   }
 
   // game timer
-  timer(clear) {
+  timer(start) {
 
     let x = this._move_dur / 1000;
 
-    // clear timer
-    if(clear) {
-
-      while(x--) {
-        clearTimeout(app._timer[x]);
-        delete(app._timer[x]);
-      }
-
     // start timer
-    } else {
-
+    if(start) {
       while(x) {
         this._timer[x - 1] = setTimeout((y) => {
-          log(y);
+log('timer: ' + y);
           // times up!
           if(y === this._move_dur / 1000) {
             this.lose('times up!');
           }
         }, x * 1000, x--);
       }
+
+    // kill timer
+    } else {
+      while(x--) {
+        clearTimeout(this._timer[x]);
+        delete(this._timer[x]);
+      }
     }
   }
 
-  // verify move
+  // verify input/move
   update(pad) {
 
     if(this._playing) {
+      this.timer(0);
+log('move: ' + parseInt(pad) +', '+ this._moves[this._cur_move]);
+      // correct move
+      if(parseInt(pad) === this._moves[this._cur_move]) {
+        this._cur_move = this._cur_move + 1;
+        this.next();
 
-      // kill timer
-      this.timer(1);
-    // if(pad === this._moves[this._cur_move]) {
-
-      // this.next();
-
-    // } else {
-
-      // this.lose();
-
-    // }
-
+      // incorrect move
+      } else {
+        this.lose('oops!');
+      }
     }
   }
 
-  // queue next move
+  // next move
   next() {
+log('next move...');
+log(this._cur_move +', '+ this._level);
+    // level complete
+    if(this._cur_move === this._level) {
+      this._cur_move = 0;
+      this.level(this._level + 1);
+      setTimeout(() => {
+        this.cycle();
+      }, this._message_dur);
 
-    // this._cur_move ++
-
-    // if moves[cur] = level ... level('up')
-
-    // else moves[cur] ++
-
+    // reset timer
+    } else {
+      this.timer(1);
+    }
   }
 
   // game over
   lose(msg) {
 log('game over');
-
     this._playing = false;
     this.display(msg, this._message_dur * 2);
 
@@ -221,7 +232,7 @@ log('game over');
   display(msg, dur) {
     // TODO add 'flashing' option (game over/win/etc)
 
-    // set or clear text
+    // set/clear text
     if(msg) {
       this._display.html(msg);
     } else {
