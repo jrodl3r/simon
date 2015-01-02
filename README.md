@@ -10,4 +10,4 @@ Grunt » Jasmine, ES6/Traceur, Sass.
 ### Setup
     $ npm install
     $ grunt
-    $ server
+    $ phpserver 1337

@@ -52,11 +52,71 @@ class Simon extends Game {
     this._start_btn     = $('#start');
     this._display       = $('#display');
     this._pulse_dur     = 300;
-    this._seqence_dur   = 1000;
+    this._seqence_dur   = 700;
     this._message_dur   = 1000;
     this._move_dur      = 5000;
+    this._sounds        = { green: 0, red: 0, blue: 0, yellow: 0, gameover: 0 };
 
+    this.initAudio();
     this.interact();
+  }
+
+  // setup sound
+  initAudio() {
+
+    let green_file, red_file, blue_file, yellow_file, gameover_file;
+
+    // check if Audio() is supported
+    if (typeof Audio !== 'undefined' && Audio !== null) {
+
+      // load WAV
+      if ((new Audio()).canPlayType('audio/ogg; codecs=vorbis') === '') {
+        green_file    = '../../audio/pad-green.wav';
+        red_file      = '../../audio/pad-red.wav';
+        blue_file     = '../../audio/pad-blue.wav';
+        yellow_file   = '../../audio/pad-yellow.wav';
+        gameover_file = '../../audio/game-over.wav';
+
+      // load OGG
+      } else {
+        green_file    = '../../audio/pad-green.ogg';
+        red_file      = '../../audio/pad-red.ogg';
+        blue_file     = '../../audio/pad-blue.ogg';
+        yellow_file   = '../../audio/pad-yellow.ogg';
+        gameover_file = '../../audio/game-over.ogg';
+      }
+
+      // buffer sounds
+      this._sounds['green']    = new Audio(green_file);
+      this._sounds['red']      = new Audio(red_file);
+      this._sounds['blue']     = new Audio(blue_file);
+      this._sounds['yellow']   = new Audio(yellow_file);
+      this._sounds['gameover'] = new Audio(gameover_file);
+    }
+  }
+
+  // play sound
+  playAudio(id) {
+
+    switch (id) {
+      case '0':
+        this._sounds['green'].play();
+        break;
+      case '1':
+        this._sounds['red'].play();
+        break;
+      case '2':
+        this._sounds['blue'].play();
+        break;
+      case '3':
+        this._sounds['yellow'].play();
+        break;
+      case 'gameover':
+        this._sounds['gameover'].play();
+        break;
+      default:
+        console.log('error: sound not found');
+    }
   }
 
   // reset
@@ -212,8 +272,9 @@ class Simon extends Game {
     this._gameover = true;
     this.display(msg, this._message_dur * 2);
 
-    // display game-over outro
+    // game-over outro
     setTimeout(() => {
+      this.playAudio('gameover');
       this.display('game over', this._message_dur * 3);
       this._playing = false;
     }, this._message_dur * 2);
@@ -225,9 +286,10 @@ class Simon extends Game {
     this._level = level;
   }
 
-  // trigger flash
+  // flash + play sound
   pulse(el) {
 
+    this.playAudio(el.attr('padnum'));
     el.addClass('active');
     setTimeout(() => {
       el.removeClass('active');
