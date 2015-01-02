@@ -59,12 +59,11 @@ class Simon extends Game {
     this._message_dur   = 1000;
     this._move_dur      = 5000;
 
-    this.init();
     this.interact();
   }
 
   // reset
-  init() {
+  init() { log('init()');
 
     // reset & start sequence
     this._level         = 1;
@@ -74,7 +73,7 @@ class Simon extends Game {
 
     // generate moves
     let x = this._max_level,
-    y = this._pads.length - 1;
+        y = this._pads.length - 1;
 
     while(x--) {
       this._moves.push(Math.round(Math.random() * y));
@@ -87,7 +86,9 @@ class Simon extends Game {
     // start button
     this._start_btn.on('click', (e) => {
       e.preventDefault();
-      this.play();
+      if(!this._playing) {
+        this.play();
+      }
     });
 
     // pads
@@ -108,7 +109,7 @@ class Simon extends Game {
   }
 
   // reveal sequence
-  cycle() {
+  cycle() { log('cycle()');
 
     let x = this._level;
 
@@ -132,7 +133,7 @@ class Simon extends Game {
           setTimeout(() => {
             this.display('go!', this._message_dur * 2);
             this.timer(1);
-          }, this._message_dur / 2);
+          }, this._message_dur);
         }
       }, (this._level - x) * this._seqence_dur, x + 1);
     }
@@ -146,8 +147,8 @@ class Simon extends Game {
     // start timer
     if(start) {
       while(x) {
-        this._timer[x - 1] = setTimeout((y) => {
-log('timer: ' + y);
+        this._timer[x - 1] = setTimeout((y) => { log('timer: ' + y);
+
           // times up!
           if(y === this._move_dur / 1000) {
             this.lose('times up!');
@@ -156,7 +157,7 @@ log('timer: ' + y);
       }
 
     // kill timer
-    } else {
+    } else { log('kill timer');
       while(x--) {
         clearTimeout(this._timer[x]);
         delete(this._timer[x]);
@@ -165,11 +166,13 @@ log('timer: ' + y);
   }
 
   // verify input/move
-  update(pad) {
+  update(pad) { log('update() : ' + parseInt(pad) + ', ' + this._moves[this._cur_move]);
 
     if(this._playing) {
+
+      // kill timer
       this.timer(0);
-log('move: ' + parseInt(pad) +', '+ this._moves[this._cur_move]);
+
       // correct move
       if(parseInt(pad) === this._moves[this._cur_move]) {
         this._cur_move = this._cur_move + 1;
@@ -183,9 +186,8 @@ log('move: ' + parseInt(pad) +', '+ this._moves[this._cur_move]);
   }
 
   // next move
-  next() {
-log('next move...');
-log(this._cur_move +', '+ this._level);
+  next() { log('next() : ' + this._cur_move + ', ' + this._level);
+
     // level complete
     if(this._cur_move === this._level) {
       this._cur_move = 0;
@@ -201,16 +203,16 @@ log(this._cur_move +', '+ this._level);
   }
 
   // game over
-  lose(msg) {
-log('game over');
+  lose(msg) { log('lose()');
+
     this._playing = false;
+    this.timer(0);
     this.display(msg, this._message_dur * 2);
 
     setTimeout(() => {
       this.display('game over', this._message_dur * 3);
     }, this._message_dur * 2);
   }
-
 
   // update level
   level(level) {
@@ -230,7 +232,6 @@ log('game over');
 
   // update hud display
   display(msg, dur) {
-    // TODO add 'flashing' option (game over/win/etc)
 
     // set/clear text
     if(msg) {
@@ -249,4 +250,3 @@ log('game over');
 }
 
 let app = new Simon('Simon');
-// $(document).ready(function(){});
