@@ -116,7 +116,7 @@ class Simon extends Game {
   }
 
   // reveal sequence
-  cycle() { log('cycle()');
+  cycle() { //log('cycle()');
 
     let x = this._level;
 
@@ -152,7 +152,7 @@ class Simon extends Game {
     // start timer
     if (start) {
       while (x) {
-        this._timer[x - 1] = setTimeout((y) => { log('timer: ' + y);
+        this._timer[x - 1] = setTimeout((y) => { //log('timer: ' + y);
           if (y === this._move_dur / 1000) { // times up!
             this.lose('times up!');
             this.timer(0);
@@ -161,7 +161,7 @@ class Simon extends Game {
       }
 
     // kill timer
-    } else { log('kill timer');
+    } else { //log('kill timer');
       while (x--) {
         clearTimeout(this._timer[x]);
         delete(this._timer[x]);
@@ -170,7 +170,7 @@ class Simon extends Game {
   }
 
   // verify input/move
-  update(pad) { log('update() : ' + parseInt(pad) + ', ' + this._moves[this._cur_move]);
+  update(pad) { //log('update() : ' + parseInt(pad) + ', ' + this._moves[this._cur_move]);
 
     if (this._playing) {
       this.timer(0); // kill timer
@@ -188,7 +188,7 @@ class Simon extends Game {
   }
 
   // next move
-  next() { log('next() : ' + this._cur_move + ', ' + this._level);
+  next() { //log('next() : ' + this._cur_move + ', ' + this._level);
 
     // level complete
     if (this._cur_move === this._level) {
@@ -206,7 +206,7 @@ class Simon extends Game {
   }
 
   // game over
-  lose(msg) { log('lose()');
+  lose(msg) { //log('lose()');
 
     // disable input, display message
     this._gameover = true;
@@ -235,7 +235,7 @@ class Simon extends Game {
   }
 
   // update hud display
-  display(msg, dur) {
+  display(msg, dur) { //log('display(' + msg + ', ' + dur + ')');
 
     // set/clear text
     if (msg) {
